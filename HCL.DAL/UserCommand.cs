@@ -33,7 +33,7 @@ namespace HCL.DAL
                         UserId = Convert.ToString(dt.Rows[0]["UserId"]),
                         FirstName = Convert.ToString(dt.Rows[0]["FirstName"]),
                         LastName = Convert.ToString(dt.Rows[0]["LastName"]),
-                        Email = Convert.ToString(dt.Rows[0]["LastName"]),
+                        Email = Convert.ToString(dt.Rows[0]["Email"]),
                         IsActive = Convert.ToBoolean(dt.Rows[0]["IsActive"])
                     });
                 }
@@ -45,7 +45,7 @@ namespace HCL.DAL
         {
             using (Database db = new Database())
             {
-                var query = "SELECT UserId, FirstName, LastName, Email, IsActive FROM User WHERE Id = @id";
+                var query = "SELECT UserId, PCode, FirstName, LastName, Email, IsActive FROM User WHERE UserId = @id";
 
                 var args = new Dictionary<string, object>
                 {
@@ -62,9 +62,10 @@ namespace HCL.DAL
                 var user = new User
                 {
                     UserId = Convert.ToString(dt.Rows[0]["UserId"]),
+                    PCode = Convert.ToString(dt.Rows[0]["PCode"]),
                     FirstName = Convert.ToString(dt.Rows[0]["FirstName"]),
                     LastName = Convert.ToString(dt.Rows[0]["LastName"]),
-                    Email = Convert.ToString(dt.Rows[0]["LastName"]),
+                    Email = Convert.ToString(dt.Rows[0]["Email"]),
                     IsActive = Convert.ToBoolean(dt.Rows[0]["IsActive"])
                 };
 
@@ -76,7 +77,7 @@ namespace HCL.DAL
         {
             using (Database db = new Database())
             {
-                const string query = "INSERT INTO User(UserId, PCode, FirstName, LastName, Email, IsActive) VALUES('@UserId', '@Password', '@FirstName', '@LastName', '@Email', '@IsActive')";
+                const string query = "INSERT INTO User(UserId, PCode, FirstName, LastName, Email, IsActive) VALUES(@UserId, @Password,@FirstName, @LastName, @Email, true)";
 
                 //here we are setting the parameter values that will be actually 
                 //replaced in the query in Execute method
@@ -86,8 +87,7 @@ namespace HCL.DAL
                     {"@Password", newObj.PCode},
                     {"@FirstName", newObj.FirstName},
                     {"@LastName", newObj.LastName},
-                    {"@Email", newObj.Email},
-                    {"@IsActive", newObj.IsActive}
+                    {"@Email", newObj.Email}
                 };
 
                 return db.ExecuteWrite(query, args) > 0;
@@ -98,7 +98,7 @@ namespace HCL.DAL
         {
             using (Database db = new Database())
             {
-                const string query = "UPDATE User SET FirstName = '@FirstName', LastName = '@LastName', Email = '@Email', IsActive = '@IsActive' WHERE UserId = @UserId";
+                const string query = "UPDATE User SET FirstName = @FirstName, LastName = @LastName, Email = @Email, IsActive = @IsActive WHERE UserId = @UserId";
 
                 //here we are setting the parameter values that will be actually 
                 //replaced in the query in Execute method

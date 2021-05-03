@@ -1,6 +1,7 @@
 ﻿using HCL.DTO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -14,41 +15,9 @@ namespace HCL.DAL
         public SQLiteConnection myConnection;
         public Database()
         {
+                string dbfullpath = ConfigurationManager.AppSettings["dbpath"].ToString();
 
-            if (!File.Exists("./database.sqlite3"))
-            {
-                SQLiteConnection.CreateFile("database.sqlite3");
-                System.Console.WriteLine("Database file created");
-
-                string createTableQuery = @"CREATE TABLE IF NOT EXISTS [User] (
-                          [UserId] VARCHAR(40) NOT NULL PRIMARY KEY,
-                          [PCode] VARCHAR(1000) NULL,
-                          [FirstName] VARCHAR(100) NULL,
-                          [LastName] VARCHAR(100) NULL,
-                          [Email] VARCHAR(100) NULL,
-                          [IsActive] BIT NULL
-                          )";
-                string dbfullpath = Path.GetFullPath("database.sqlite3");
-
-                myConnection = new SQLiteConnection(@"Data Source=C:\Users\Sita Ramudu\Source\Repos\UserManagement\HCL.DAL\AppData\database.sqlite3");
-                using (SQLiteCommand com = new SQLiteCommand(myConnection))
-                {
-                    OpenConnection();                   // Open the connection to the database
-
-                    com.CommandText = createTableQuery;     // Set CommandText to our query that will create the table
-                    com.ExecuteNonQuery();                  // Execute the query
-
-                    CloseConnection();      // Close the connection to the database
-                }
-
-            }
-            else
-            {
-                string dbfullpath = Path.GetFullPath("database.sqlite3");
-
-                myConnection = new SQLiteConnection(@"Data Source=C:\Users\Sita Ramudu\Source\Repos\UserManagement\HCL.DAL\AppData\database.sqlite3");
-
-            }
+                myConnection = new SQLiteConnection(@"Data Source=" + dbfullpath);
         }
 
         public void OpenConnection()

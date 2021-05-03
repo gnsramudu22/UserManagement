@@ -36,11 +36,11 @@ namespace HCL.Tests
             using (UserManager mgr = new UserManager())
             {
                 User user = new User {
-                    UserId = "sitaram1",
-                    PCode = "sitaram1",
+                    UserId = "sa",
+                    PCode = "admin",
                     FirstName= "Sita Ramudu",
                     LastName = "G N ",
-                    Email="abc@aa.com"
+                    Email="sa@admin.com"
                 };
                 bool result = mgr.Save(user);
                 Assert.AreEqual(true, result);
