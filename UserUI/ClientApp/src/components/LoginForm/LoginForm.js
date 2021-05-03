@@ -22,10 +22,11 @@ function LoginForm(props) {
     const handleSubmitClick = async (e) => {
         e.preventDefault();
         const payload={
-            "userId":state.email,
-            "password":state.password,
+            "UserId":state.email,
+            "Password":state.password,
         }
-        const resp = await apiCall('/login', 'GET', payload)
+        const resp = await apiCall('/login/Authenticate', 'POST', payload)
+        console.log(resp);
         if (resp.Data) {
             setState(prevState => ({
                 ...prevState,

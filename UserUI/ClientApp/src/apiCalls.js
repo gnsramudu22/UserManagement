@@ -18,7 +18,7 @@ export const apiCall = (
 ) => {
     let baseURL, token;
 
-    baseURL = 'http://localhost/api';
+    baseURL = 'http://localhost/userapi';
     token = getSessionValue("token");
 
     const fullUrl = baseURL + endpoint;

@@ -13,7 +13,7 @@ namespace HCL.API.Controllers
     {
 
         [HttpGet]
-        [Route("/users")]
+        [Route("users")]
         public HttpResponseMessage GetAll()
         {
             using(UserManager mgr = new UserManager())
@@ -31,7 +31,7 @@ namespace HCL.API.Controllers
 
 
         [HttpGet]
-        [Route("/user/{userId}")]
+        [Route("user/{userId}")]
         public HttpResponseMessage GetByUserID(string userId)
         {
             using (UserManager mgr = new UserManager())
@@ -48,7 +48,7 @@ namespace HCL.API.Controllers
         }
 
         [HttpPost]
-        [Route("/user/save")]
+        [Route("user/save")]
         public HttpResponseMessage Save(User newObj)
         {
             using (UserManager mgr = new UserManager())
@@ -65,7 +65,7 @@ namespace HCL.API.Controllers
         }
 
         [HttpPost]
-        [Route("/user/update")]
+        [Route("user/update")]
         public HttpResponseMessage Update(User modObj)
         {
             using (UserManager mgr = new UserManager())
@@ -83,7 +83,7 @@ namespace HCL.API.Controllers
 
 
         [HttpDelete]
-        [Route("/user/{userId}")]
+        [Route("user/{userId}")]
         public HttpResponseMessage Delete(string userId)
         {
             using (UserManager mgr = new UserManager())
